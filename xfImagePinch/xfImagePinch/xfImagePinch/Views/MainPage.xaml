@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:viewmodel="clr-namespace:xfImagePinch.ViewModels"
+             x:DataType="viewmodel:MainPageViewModel"
+             x:Class="xfImagePinch.Views.MainPage"
+             Title="圖片縮放範例">
+
+  <Grid
+    RowSpacing="0" ColumnSpacing="0"
+    RowDefinitions="*,auto">
+    <ScrollView Grid.Row="0"
+                Margin="10"
+                Orientation="Both"
+                VerticalScrollBarVisibility="Always"
+                HorizontalScrollBarVisibility="Always"
+                >
+      <Image Source="waterfront.jpg"
+             Aspect="AspectFit"
+             WidthRequest="{Binding CurrentWidth}"
+             HeightRequest="{Binding CurrentHeigh}"/>
+    </ScrollView>
+
+    <Grid Grid.Row="1"
+          RowSpacing="0" ColumnSpacing="0"
+          Padding="10" BackgroundColor="LightGreen">
+      <Slider Grid.Row="1"
+              Maximum="5.0" Minimum="0.01"
+              Margin="10"
+              Value="{Binding Ratio}">
+        <Slider.Behaviors>
+          <prism:EventToCommandBehavior
+            EventName="ValueChanged"
+            Command="{Binding ResizeImageCommand}"/>
+        </Slider.Behaviors>
+      </Slider>
+    </Grid>
+  </Grid>
+
+</ContentPage>
