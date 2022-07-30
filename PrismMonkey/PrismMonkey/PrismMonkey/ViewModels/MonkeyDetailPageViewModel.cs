@@ -18,11 +18,16 @@ namespace PrismMonkey.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        #region 透過建構式注入的服務
         private readonly INavigationService navigationService;
         private readonly IPageDialogService dialogService;
         private readonly IMap map;
+        #endregion
+
+        #region 用於進行 Data Binding 使用的命令或者資料物件
         public Monkey Monkey { get; set; } = new();
         public DelegateCommand OpenMapCommand { get; set; }
+        #endregion
 
         public MonkeyDetailPageViewModel(INavigationService navigationService,
             IPageDialogService dialogService, IMap map)

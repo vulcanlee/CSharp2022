@@ -48,6 +48,7 @@ namespace PrismMonkey.ViewModels
             this.connectivity = connectivity;
             this.geolocation = geolocation;
 
+            #region 點選某個猴子之後，要進行頁面切換的命令
             GoToDetailsCommand = new DelegateCommand<Monkey>(async monkey =>
             {
                 // 若沒有取得猴子資訊，則不會有任何動作
@@ -56,9 +57,22 @@ namespace PrismMonkey.ViewModels
 
                 NavigationParameters parameters = new();
                 parameters.Add(ConstantHelper.NavigationKeyMonkey, monkey);
-                await navigationService.NavigateAsync(ConstantHelper.MonkeyDetailPage, parameters);
-            });
 
+                #region 舊的頁面導航用法
+                //await navigationService.NavigateAsync(ConstantHelper.MonkeyDetailPage, parameters);
+                #endregion
+
+                #region 採用 Navigation Builder 的用法
+                // 參考文章 : https://github.com/PrismLibrary/Prism/issues/2283
+                await navigationService.CreateBuilder()
+                .WithParameters(parameters)
+                .AddNavigationSegment(ConstantHelper.MonkeyDetailPage)
+                .NavigateAsync();
+                #endregion
+            });
+            #endregion
+
+            #region 取得網路上最新猴子清單資訊的命令
             GetMonkeysCommand = new DelegateCommand(async () =>
             {
                 if (IsBusy)
@@ -94,7 +108,9 @@ namespace PrismMonkey.ViewModels
                     IsRefreshing = false;
                 }
             });
+            #endregion
 
+            #region 取得當前 GPS 位置，並且找出最接近猴子的命令
             GetClosestMonkeyCommand = new DelegateCommand(async () =>
             {
                 if (IsBusy || Monkeys.Count == 0)
@@ -128,6 +144,7 @@ namespace PrismMonkey.ViewModels
                     await dialogService.DisplayAlertAsync("Error!", ex.Message, "OK");
                 }
             });
+            #endregion
         }
 
         public void OnNavigatedFrom(INavigationParameters parameters)
