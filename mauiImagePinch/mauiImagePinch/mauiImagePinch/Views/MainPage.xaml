@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:mauiImagePinch.ViewModels"
+             xmlns:prism="http://prismlibrary.com"
+             x:DataType="viewmodel:MainPageViewModel"
+             Title="圖片縮放範例"
+             x:Class="mauiImagePinch.Views.MainPage">
+
+  <Grid
+    RowSpacing="0" ColumnSpacing="0"
+    RowDefinitions="*,auto">
+    <ScrollView Grid.Row="0"
+                Margin="10"
+                Orientation="Both"
+                VerticalScrollBarVisibility="Always"
+                HorizontalScrollBarVisibility="Always"
+                >
+      <Image Source="waterfront.jpg"
+             Aspect="AspectFill"
+             WidthRequest="{Binding CurrentWidth}"
+             HeightRequest="{Binding CurrentHeigh}"/>
+    </ScrollView>
+    
+    <Grid Grid.Row="1"
+          RowSpacing="0" ColumnSpacing="0"
+          Padding="10" BackgroundColor="LightGreen">
+      <Slider Grid.Row="1"
+              Maximum="5.0" Minimum="0.01"
+              Margin="10"
+              Value="{Binding Ratio}">
+        <Slider.Behaviors>
+          <prism:EventToCommandBehavior
+            EventName="ValueChanged"
+            Command="{Binding ResizeImageCommand}"/>
+        </Slider.Behaviors>
+      </Slider>
+    </Grid>
+  </Grid>
+
+</ContentPage>
