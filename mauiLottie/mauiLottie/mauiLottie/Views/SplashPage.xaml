@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+             x:Class="mauiLottie.Views.SplashPage"
+             Title="SplashPage">
+
+  <Grid BackgroundColor="#0c2468">
+      <skia:SKLottieView
+                Source="splash.json"
+                RepeatCount="-1"
+                SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                HeightRequest="480"
+                WidthRequest="320"
+                HorizontalOptions="Center" VerticalOptions="Center" />
+
+      <Label
+                Text="Hello, Vulcan!"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="32" TextColor="LightGray"
+                HorizontalOptions="Center" VerticalOptions="End" />
+  </Grid>
+</ContentPage>
