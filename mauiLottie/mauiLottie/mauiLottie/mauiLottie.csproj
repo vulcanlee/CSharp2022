@@ -54,7 +54,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Prism.DryIoc.Maui" Version="8.1.191-beta" />
+    <PackageReference Include="Prism.DryIoc.Maui" Version="8.1.254-beta" />
     <PackageReference Include="PropertyChanged.Fody" Version="3.4.1" />
     <PackageReference Include="SkiaSharp.Extended.UI.Maui" Version="2.0.0-preview.59" />
   </ItemGroup>
