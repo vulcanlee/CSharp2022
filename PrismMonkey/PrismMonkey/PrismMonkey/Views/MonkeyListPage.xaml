@@ -15,6 +15,7 @@
         RowDefinitions="*,Auto"
         RowSpacing="0"
         BackgroundColor="{AppThemeBinding Light={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}">
+
     <RefreshView
             Grid.ColumnSpan="2"
             Command="{Binding GetMonkeysCommand}"

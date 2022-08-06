@@ -1,6 +1,6 @@
 ﻿using SkiaSharp.Views.Maui.Controls.Hosting;
 
-namespace mauiLottie;
+namespace mauiLiveChart;
 
 public static class MauiProgram
 {
@@ -8,9 +8,8 @@ public static class MauiProgram
     {
         var builder = MauiApp.CreateBuilder();
         builder
-            //.UseMauiApp<App>()
             .UsePrismApp<App>(PrismStartup.Configure)
-            .UseSkiaSharp()
+            .UseSkiaSharp(true)
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
