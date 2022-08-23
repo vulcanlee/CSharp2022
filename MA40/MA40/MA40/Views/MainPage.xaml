@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="使用字型圖示 Font Icon"
+             x:Class="MA40.Views.MainPage">
+
+  <ScrollView>
+    <VerticalStackLayout
+            Spacing="25"
+            Padding="30,0"
+            VerticalOptions="Center">
+
+      <Image Source="prism.png"
+             SemanticProperties.Description="Cute dot net bot waving hi to you!"
+             HeightRequest="150"
+             HorizontalOptions="Center" />
+
+      <HorizontalStackLayout HorizontalOptions="Center">
+        <!-- Use font name -->
+        <Label Text="&#xF1B0A;" FontSize="40" TextColor="Blue"
+               FontFamily="material" />
+
+        <!--Use Image-->
+        <Image>
+          <Image.Source>
+            <FontImageSource Glyph="&#xF0610;" Color="Red"
+                         FontFamily="{OnPlatform iOS=material, Android=material, WinUI=material}"
+                         Size="40" />
+          </Image.Source>
+        </Image>
+      </HorizontalStackLayout>
+      
+
+    </VerticalStackLayout>
+  </ScrollView>
+
+</ContentPage>
