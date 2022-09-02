@@ -1,10 +1,22 @@
-﻿#region 若在 Parallel.Foreach 內使用 async 方法，將會立即結束平行敘述，相關程式碼會在背景執行中
+﻿#region 若在 Parallel.Foreach 內使用同步方式進行委派方法的設計，會等到所有委派方法都執行完畢後，才會繼續往下執行
+Console.WriteLine($"使用 Parallel.Foreach 與同步委派方法 開始 {DateTime.Now}");
+Parallel.ForEach(Enumerable.Range(0, 3), async (x, t) =>
+{
+    Console.WriteLine($"  Bpfsync {x}");
+    Thread.Sleep(3000);
+    Console.WriteLine($"  Cpfsync {x}");
+});
+// 當看到這行敘述，表示 Parallel.ForEach 已經結束執行，不過，將還沒看到所有的 Cpf 文字輸出
+Console.WriteLine($"使用 Parallel.Foreach 與同步委派方法 結束 {DateTime.Now}");
+#endregion
+
+#region 若在 Parallel.Foreach 內使用 async 方法，將會立即結束平行敘述，相關程式碼會在背景執行中
 Console.WriteLine($"使用 Parallel.Foreach 開始 {DateTime.Now}");
 Parallel.ForEach(Enumerable.Range(0, 3), async (x, t) =>
 {
-    Console.WriteLine("  Bpf");
+    Console.WriteLine($"  Bpf {x}");
     await Task.Delay(3000);
-    Console.WriteLine("  Cpf");
+    Console.WriteLine($"  Cpf {x}");
 });
 // 當看到這行敘述，表示 Parallel.ForEach 已經結束執行，不過，將還沒看到所有的 Cpf 文字輸出
 Console.WriteLine($"使用 Parallel.Foreach 結束 {DateTime.Now}");
@@ -23,9 +35,9 @@ Console.WriteLine();
 Console.WriteLine($"使用 Parallel.ForEachAsync 開始 {DateTime.Now}");
 await Parallel.ForEachAsync(Enumerable.Range(0, 3), async (x, t) =>
 {
-    Console.WriteLine("  Bpfa");
+    Console.WriteLine($"  Bpfa {x}");
     await Task.Delay(3000);
-    Console.WriteLine("  Cpfa");
+    Console.WriteLine($"  Cpfa {x}");
 });
 Console.WriteLine($"使用 Parallel.ForEachAsync 結束 {DateTime.Now}");
 #endregion
