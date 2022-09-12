@@ -42,6 +42,7 @@ public partial class MainPage : ContentPage
                 {
                     ClassId = formItem.Name,
                     IsPassword = formItem.IsPassword,
+                    IsEnabled = !formItem.IsReadOnly,
                 }
                 .Text(formItem.ValueString)
                 .Placeholder(formItem.PlaceHolder)
@@ -58,6 +59,44 @@ public partial class MainPage : ContentPage
             }
             #endregion
 
+            #region DateTimePicker 文字輸入盒
+            if (formItem.ViewType == ViewTypeEnum.DatePicker)
+            {
+                DatePicker datePicker = new DatePicker()
+                {
+                    ClassId = formItem.Name,
+                    IsEnabled = !formItem.IsReadOnly,
+                    Date = formItem.ValueDateTime,
+                }
+                .Margin(new Thickness(0, 0, 15, 0));
+
+                datePicker.DateSelected += (s, e) =>
+                {
+                    formItem.ValueDateTime = e.NewDate;
+                };
+
+                hostContainer.Children.Add(datePicker);
+            }
+            #endregion
+
+            #region Image 圖片
+            if (formItem.ViewType == ViewTypeEnum.Image)
+            {
+                Image image = new Image()
+                {
+                    ClassId = formItem.Name,
+                    IsEnabled = !formItem.IsReadOnly,
+                    Source = formItem.ValueString,
+                    WidthRequest = formItem.ImageWidth,
+                    HeightRequest = formItem.ImageHeight,
+                    HorizontalOptions = LayoutOptions.Start,
+                    VerticalOptions = LayoutOptions.Start,
+                }
+                .Margin(new Thickness(0, 0, 15, 0));
+
+                hostContainer.Children.Add(image);
+            }
+            #endregion
         }
 
         Button myButton = new Button()

@@ -12,7 +12,8 @@ public enum ViewTypeEnum
 {
     Entry,
     Editor,
-    DateTimePicker,
+    DatePicker,
+    Image,
 }
 public enum ValueTypeEnum
 {
@@ -35,6 +36,7 @@ public partial class FormItem : ObservableObject
     int valueInt;
     [ObservableProperty]
     double valueDouble;
+    [ObservableProperty]
     DateTime valueDateTime;
     [ObservableProperty]
     TimeSpan valueTimeSpan;
@@ -44,4 +46,8 @@ public partial class FormItem : ObservableObject
     bool isPassword = false;
     [ObservableProperty]
     string placeHolder;
+    [ObservableProperty]
+    double imageWidth;
+    [ObservableProperty]
+    double imageHeight;
 }

@@ -19,7 +19,7 @@ public class FormHelper
                 ViewType = ViewTypeEnum.Entry,
                 ValueType = ValueTypeEnum.String,
                 IsReadOnly = false,
-                ValueString = "Vulcan",
+                ValueString = "",
                 PlaceHolder = "請輸入使用者帳號"
             },
             new FormItem()
@@ -29,8 +29,38 @@ public class FormHelper
                 ViewType = ViewTypeEnum.Entry,
                 ValueType = ValueTypeEnum.String,
                 IsReadOnly = false,
-                ValueString = "123",
+                IsPassword = true,
+                ValueString = "",
                 PlaceHolder = "請輸入使用者密碼"
+            },
+            new FormItem()
+            {
+                Name = "Entry3",
+                Label = "驗證碼",
+                ViewType = ViewTypeEnum.Entry,
+                ValueType = ValueTypeEnum.String,
+                IsReadOnly = true,
+                ValueString = "N/A",
+                PlaceHolder = ""
+            },
+            new FormItem()
+            {
+                Name = "DateTimePicker1",
+                Label = "啟用日期",
+                ViewType = ViewTypeEnum.DatePicker,
+                ValueType = ValueTypeEnum.DateTime,
+                IsReadOnly = false,
+                ValueDateTime = DateTime.Now.AddDays(-2),
+            },
+            new FormItem()
+            {
+                Name = "Image1",
+                Label = "申報物品",
+                ViewType = ViewTypeEnum.Image,
+                ValueType = ValueTypeEnum.String,
+                ValueString = "https://ichef.bbci.co.uk/news/976/cpsprodpb/EB2E/production/_126060206_mediaitem126060205.jpg",
+                ImageWidth=250,
+                ImageHeight=250,
             },
         };
         return aForm;
