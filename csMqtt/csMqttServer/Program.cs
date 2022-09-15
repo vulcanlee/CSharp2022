@@ -23,7 +23,8 @@ internal class Program
         // Message arrived configuration
         _mqttServer.UseApplicationMessageReceivedHandler(async e =>
         {
-            if (Encoding.UTF8.GetString(e.ApplicationMessage.Payload) == "Test Message")
+            var foo = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
+            if (foo == "Test Message")
             {
                 Console.WriteLine("subscription message received");
                 Console.WriteLine("Simulating messages...");
