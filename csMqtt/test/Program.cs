@@ -22,59 +22,75 @@ namespace csMqttTwoTopic
         static List<Task> _tasks = new List<Task>();
         static object _lock = new object();
         static int Total = 0;
+        //static string sendTopic1 = @"/CheckinKiosk/301/ClinicStartInfos";
+        //static string sendTopic2 = @"/CheckinKiosk/301/RegisterData";
+        //static string sendTopicAll = @"/CheckinKiosk/301/#";
+        static string sendTopic1 = @"CheckinKiosk/301/ClinicStartInfos";
+        static string sendTopic2 = @"CheckinKiosk/301/RegisterData";
+        static string sendTopic3 = @"CheckinKiosk/302/ReleaseData";
+        static string sendTopicAll = @"CheckinKiosk/301/#";
 
         static async Task Main(string[] args)
         {
             Console.WriteLine($"Broker 端開始啟動");
-            //Broker();
+            Broker();
 
             #region Client Init
             Console.WriteLine($"準備進行用戶端的初始化");
-            //Client("ClientA", MessageTopicEnum.TopicTitle2.ToString());
-            //Client("ClientB", MessageTopicEnum.TopicTitle5.ToString());
+            var myClient = ClientSimulator("xxxx", sendTopic1);
+            var myPublishClient = ClientPublishSimulator("Publish");
             #endregion
-
-
-            string sendTopic = @"CheckinKiosk\301\ClinicStartInfos";
-
-            var myClient = ClientSimulator("xxxx", sendTopic);
 
             // for Debug
             Console.WriteLine($"Delay 3 seconds");
             await Task.Delay(3000);
 
-            await myClient.PublishAsync(new MqttApplicationMessage()
-            {
-                Topic = sendTopic,
-                Payload = Encoding.UTF8.GetBytes($"{DateTime.Now} - {DateTime.Now.Ticks}"),
-            });
+            //await myPublishClient.PublishAsync(new MqttApplicationMessage()
+            //{
+            //    Topic = sendTopic1,
+            //    Payload = Encoding.UTF8.GetBytes($"{DateTime.Now} - {DateTime.Now.Ticks}"),
+            //});
+            //await myPublishClient.PublishAsync(new MqttApplicationMessage()
+            //{
+            //    Topic = sendTopic2,
+            //    Payload = Encoding.UTF8.GetBytes($"{DateTime.Now} - {DateTime.Now.Ticks}"),
+            //});
+
 
             #region Loop Testing
-            //for (int i = 0; i < 1000; i++)
-            //{
-            //    Console.WriteLine($"*** 即將從伺服器內連續送出兩個訊息");
-            //    #region Send Message
-            //    sendTopic = MessageTopicEnum.TopicTitle1.ToString();
-            //    Console.WriteLine($"@ Server 送出 {sendTopic} 訊息");
-            //    await PublishMessage(sendTopic,
-            //        $"{DateTime.Now} - {DateTime.Now.Ticks}");
-            //    #endregion
-
-            //    #region Send Message
-            //    sendTopic = MessageTopicEnum.TopicTitle5.ToString();
-            //    Console.WriteLine($"@ Server 送出 {sendTopic} 訊息");
-            //    await PublishMessage(sendTopic,
-            //        $"{DateTime.Now} - {DateTime.Now.Ticks}");
-            //    #endregion
-
-            //    #region Send Message
-            //    sendTopic = MessageTopicEnum.TopicTitle2.ToString();
-            //    Console.WriteLine($"@ Server 送出 {sendTopic} 訊息");
-            //    await PublishMessage(sendTopic,
-            //        $"{DateTime.Now} - {DateTime.Now.Ticks}");
-            //    #endregion
-            //}
+            int idx = 0;
+            for (int i = 0; i < 10; i++)
+            {
+                Console.WriteLine($"*** 即將從伺服器內連續送出兩個訊息");
+                idx++;
+                #region Send Message
+                await myPublishClient.PublishAsync(new MqttApplicationMessage()
+                {
+                    Topic = sendTopic1,
+                    Payload = Encoding.UTF8.GetBytes($"[{idx}] {DateTime.Now} - {DateTime.Now.Ticks}"),
+                    Retain = true,
+                });
+                idx++;
+                await myPublishClient.PublishAsync(new MqttApplicationMessage()
+                {
+                    Topic = sendTopic2,
+                    Payload = Encoding.UTF8.GetBytes($"[{idx}] {DateTime.Now} - {DateTime.Now.Ticks}"),
+                    Retain = true,
+                });
+                idx++;
+                await myPublishClient.PublishAsync(new MqttApplicationMessage()
+                {
+                    Topic = sendTopic3,
+                    Payload = Encoding.UTF8.GetBytes($"[{idx}] {DateTime.Now} - {DateTime.Now.Ticks}"),
+                    Retain = true,
+                });
+                #endregion
+            }
             #endregion
+
+            await Task.Delay(3000);
+            Console.WriteLine();
+            var myClientOther = ClientSimulator("zzzzz", sendTopic1);
 
             Console.ReadLine();
         }
@@ -95,8 +111,9 @@ namespace csMqttTwoTopic
             _mqttServer.UseApplicationMessageReceivedHandler(async e =>
             {
                 var foo = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
+                var bar = e.ApplicationMessage.Topic;
 
-                Console.WriteLine($"[Broker] subscription message received");
+                Console.WriteLine($"[Broker] subscription message received [{bar}] [{foo}]");
             });
 
             // When a new client connected
@@ -149,11 +166,7 @@ namespace csMqttTwoTopic
             // Create client
             _mqttClient = new MqttFactory().CreateMqttClient();
             var options = new MqttClientOptionsBuilder().WithClientId(ClientId)
-                                                        .WithTcpServer("192.168.82.12", 1883)
-                                                        .WithCredentials(new MqttClientCredentials()
-                                                        {
-                                                            Username = "UserName",
-                                                        })
+                                                        .WithTcpServer("localhost", 1884)
                                                         .Build();
             // When client connected to the server
             _mqttClient.UseConnectedHandler(async e =>
@@ -163,18 +176,66 @@ namespace csMqttTwoTopic
                 MqttClientSubscribeResult subResult =
                 await _mqttClient
                 .SubscribeAsync(new MqttClientSubscribeOptionsBuilder()
-                .WithTopicFilter(MonitorTopic)
+                .WithTopicFilter("#")
                 .Build());
+                //await _mqttClient
+                //.SubscribeAsync(new MqttClientSubscribeOptionsBuilder()
+                //.WithTopicFilter(sendTopic1)
+                //.Build());
+                //await _mqttClient
+                //.SubscribeAsync(new MqttClientSubscribeOptionsBuilder()
+                //.WithTopicFilter(sendTopic3)
+                //.Build());
+                //await _mqttClient
+                //.SubscribeAsync(new MqttClientSubscribeOptionsBuilder()
+                //.WithTopicFilter(sendTopic2)
+                //.Build());
             });
 
             // When client received a message from server
             _mqttClient.UseApplicationMessageReceivedHandler(e =>
             {
-                Interlocked.Increment(ref Total);
-                string foo = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
-                string bar = e.ApplicationMessage.Topic;
-                Console.WriteLine($"  Client[{ClientId}] {Total} 接收到 [{bar}] Payload = {foo}");
+                lock (_lock)
+                {
+                    Interlocked.Increment(ref Total);
+                    string foo = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
+                    string bar = e.ApplicationMessage.Topic;
+                    Console.WriteLine($"  Client[{ClientId}] {Total} 接收到 [{bar}] Payload = {foo}");
+                }
             });
+
+            // Connect ot server
+            _mqttClient.ConnectAsync(options, CancellationToken.None);
+            return _mqttClient;
+        }
+        static IMqttClient ClientPublishSimulator(string ClientId)
+        {
+            IMqttClient _mqttClient;
+            // Create client
+            _mqttClient = new MqttFactory().CreateMqttClient();
+            var options = new MqttClientOptionsBuilder().WithClientId(ClientId)
+                                                        .WithTcpServer("localhost", 1884)
+                                                        .Build();
+            // When client connected to the server
+            //_mqttClient.UseConnectedHandler(async e =>
+            //{
+            //    // Subscribe to a topic
+            //    Console.WriteLine($"Client[{ClientId}] Subscribe Topic[{MonitorTopic}]");
+            //    MqttClientSubscribeResult subResult =
+            //    await _mqttClient
+            //    .SubscribeAsync(new MqttClientSubscribeOptionsBuilder()
+            //    .WithTopicFilter(sendTopicAll)
+            //    .Build());
+            //});
+
+            // When client received a message from server
+            //_mqttClient.UseApplicationMessageReceivedHandler(e =>
+            //{
+            //    Interlocked.Increment(ref Total);
+            //    string foo = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
+            //    string bar = e.ApplicationMessage.Topic;
+            //    Console.WriteLine($"  Client[{ClientId}] {Total} 接收到 [{bar}] Payload = {foo}");
+            //});
 
             // Connect ot server
             _mqttClient.ConnectAsync(options, CancellationToken.None);
@@ -211,10 +272,13 @@ namespace csMqttTwoTopic
                 // When client received a message from server
                 _mqttClient.UseApplicationMessageReceivedHandler(e =>
                 {
-                    Interlocked.Increment(ref Total);
-                    string foo = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
-                    string bar = e.ApplicationMessage.Topic;
-                    Console.WriteLine($"  Client[{ClientId}] {Total} 接收到 [{bar}] Payload = {foo}");
+                    lock (_lock)
+                    {
+                        Interlocked.Increment(ref Total);
+                        string foo = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
+                        string bar = e.ApplicationMessage.Topic;
+                        Console.WriteLine($"  Client[{ClientId}] {Total} 接收到 [{bar}] Payload = {foo}");
+                    }
                 });
 
                 // Connect ot server
