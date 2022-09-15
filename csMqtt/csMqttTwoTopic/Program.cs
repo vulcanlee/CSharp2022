@@ -42,7 +42,7 @@ namespace csMqttTwoTopic
             Console.WriteLine($"Delay 3 seconds");
             await Task.Delay(5000);
 
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < 10; i++)
             {
                 Console.WriteLine($"送出第一個訊息");
                 await myClient.PublishAsync(new MqttApplicationMessage()
@@ -141,9 +141,9 @@ namespace csMqttTwoTopic
             var mqttMessage = new MqttApplicationMessageBuilder()
                                 .WithTopic(topic)
                                 .WithPayload(message)
-                                .WithAtLeastOnceQoS()
-                                .WithRetainFlag(false)
-                                .WithDupFlag(false)
+                                //.WithAtLeastOnceQoS()
+                                //.WithRetainFlag(false)
+                                //.WithDupFlag(false)
                                 .Build();
 
             // Publish the message asynchronously
