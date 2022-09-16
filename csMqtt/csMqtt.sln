@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "csMqttClient", "csMqttClien
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "csMqttTwoTopic", "csMqttTwoTopic\csMqttTwoTopic.csproj", "{068E5BFD-5504-49F5-B03A-464EB0E33F7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{0408CED1-26FF-47FC-8B91-644ABC300459}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "test", "test\test.csproj", "{0408CED1-26FF-47FC-8B91-644ABC300459}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreadSafety", "ThreadSafety\ThreadSafety.csproj", "{479C0678-8FBB-40C5-9525-28C71EE0FFA0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{0408CED1-26FF-47FC-8B91-644ABC300459}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0408CED1-26FF-47FC-8B91-644ABC300459}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0408CED1-26FF-47FC-8B91-644ABC300459}.Release|Any CPU.Build.0 = Release|Any CPU
+		{479C0678-8FBB-40C5-9525-28C71EE0FFA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{479C0678-8FBB-40C5-9525-28C71EE0FFA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{479C0678-8FBB-40C5-9525-28C71EE0FFA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{479C0678-8FBB-40C5-9525-28C71EE0FFA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
