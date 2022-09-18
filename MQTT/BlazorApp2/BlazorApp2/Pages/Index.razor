@@ -1,0 +1,68 @@
+﻿@page "/"
+@using MQTTnet;
+@using MQTTnet.Client;
+@using MQTTnet.Client.Options;
+@using MQTTnet.Client.Subscribing;
+@using MQTTnet.Server;
+@using System.Text;
+
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<button @onclick="Click">OK</button>
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+
+@code{
+    async Task Click()
+    {
+        IMqttClient Client = ClientPublishSimulator("StaticClient");
+                var foo = Encoding.UTF8.GetBytes($"{DateTime.Now} - {DateTime.Now.Ticks}");
+                var bar = new MqttApplicationMessage()
+                {
+                    Topic = "AA",
+                    Payload = foo,
+                };
+                await Client.PublishAsync(bar);
+    }
+     IMqttClient ClientPublishSimulator(string ClientId)
+    {
+        IMqttClient _mqttClient;
+        // Create client
+        _mqttClient = new MqttFactory().CreateMqttClient();
+        var options = new MqttClientOptionsBuilder()
+        .WithClientId("SDJFID")
+    .WithWebSocketServer("localhost:5059/mqtt")
+    .Build();
+        //var options = new MqttClientOptionsBuilder().WithClientId(ClientId)
+        //                                            .WithWebSocketServer("localhost:1883/mqtt")
+        //                                            .Build();
+        // When client connected to the server
+        //_mqttClient.UseConnectedHandler(async e =>
+        //{
+        //    // Subscribe to a topic
+        //    Console.WriteLine($"Client[{ClientId}] Subscribe Topic[{MonitorTopic}]");
+        //    MqttClientSubscribeResult subResult =
+        //    await _mqttClient
+        //    .SubscribeAsync(new MqttClientSubscribeOptionsBuilder()
+        //    .WithTopicFilter(sendTopicAll)
+        //    .Build());
+        //});
+
+        // When client received a message from server
+        //_mqttClient.UseApplicationMessageReceivedHandler(e =>
+        //{
+        //    Interlocked.Increment(ref Total);
+        //    string foo = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
+        //    string bar = e.ApplicationMessage.Topic;
+        //    Console.WriteLine($"  Client[{ClientId}] {Total} 接收到 [{bar}] Payload = {foo}");
+        //});
+
+        // Connect ot server
+        _mqttClient.ConnectAsync(options, CancellationToken.None);
+        return _mqttClient;
+    }
+}
