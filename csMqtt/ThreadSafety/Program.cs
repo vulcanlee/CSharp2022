@@ -36,12 +36,12 @@ public class Program
         #region Client Init
         Console.WriteLine($"準備進行用戶端的初始化");
         Client = ClientPublishSimulator("StaticClient");
-        var myClientOther = ClientSimulator("Minitor");
-        var myPublishClient = ClientPublishSimulator("Publish");
+        var myClientOther = ClientPublishSimulator("Minitor");
+        //var myPublishClient = ClientPublishSimulator("Publish");
         #endregion
 
-        // for Debug
-        Console.WriteLine($"Delay 3 seconds");
+        //// for Debug
+        //Console.WriteLine($"Delay 3 seconds");
         await Task.Delay(3000);
 
         var task1 = Task.Run(async () =>
@@ -55,6 +55,7 @@ public class Program
                     Payload = foo,
                 };
                 await Client.PublishAsync(bar);
+                Console.WriteLine(i);
             }
         });
         //var task2 = Task.Run(async () =>
@@ -101,7 +102,7 @@ public class Program
             var foo = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
             var bar = e.ApplicationMessage.Topic;
 
-            //Console.WriteLine($"[Broker] subscription message received [{bar}] [{foo}]");
+            Console.WriteLine($"[Broker] subscription message received [{bar}] [{foo}]");
         });
 
         // When a new client connected
@@ -156,28 +157,28 @@ public class Program
         // Create client
         _mqttClient = new MqttFactory().CreateMqttClient();
         var options = new MqttClientOptionsBuilder().WithClientId(ClientId)
-                                                    .WithTcpServer("localhost", 1884)
+    .WithWebSocketServer("localhost:5059/mqtt")
                                                     .Build();
         // When client connected to the server
-        //_mqttClient.UseConnectedHandler(async e =>
-        //{
-        //    // Subscribe to a topic
-        //    Console.WriteLine($"Client[{ClientId}] Subscribe Topic[{MonitorTopic}]");
-        //    MqttClientSubscribeResult subResult =
-        //    await _mqttClient
-        //    .SubscribeAsync(new MqttClientSubscribeOptionsBuilder()
-        //    .WithTopicFilter(sendTopicAll)
-        //    .Build());
-        //});
+        _mqttClient.UseConnectedHandler(async e =>
+        {
+            // Subscribe to a topic
+            //Console.WriteLine($"Client[{ClientId}] Subscribe Topic[{MonitorTopic}]");
+            MqttClientSubscribeResult subResult =
+            await _mqttClient
+            .SubscribeAsync(new MqttClientSubscribeOptionsBuilder()
+            .WithTopicFilter("#")
+            .Build());
+        });
 
         // When client received a message from server
-        //_mqttClient.UseApplicationMessageReceivedHandler(e =>
-        //{
-        //    Interlocked.Increment(ref Total);
-        //    string foo = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
-        //    string bar = e.ApplicationMessage.Topic;
-        //    Console.WriteLine($"  Client[{ClientId}] {Total} 接收到 [{bar}] Payload = {foo}");
-        //});
+        _mqttClient.UseApplicationMessageReceivedHandler(e =>
+        {
+            Interlocked.Increment(ref Total);
+            string foo = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
+            string bar = e.ApplicationMessage.Topic;
+            Console.WriteLine($"  Client[{ClientId}] {Total} 接收到 [{bar}] Payload = {foo}");
+        });
 
         // Connect ot server
         _mqttClient.ConnectAsync(options, CancellationToken.None);
