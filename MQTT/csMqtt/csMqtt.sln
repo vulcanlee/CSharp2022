@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "csMqttTwoTopic", "csMqttTwo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "test", "test\test.csproj", "{0408CED1-26FF-47FC-8B91-644ABC300459}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreadSafety", "ThreadSafety\ThreadSafety.csproj", "{479C0678-8FBB-40C5-9525-28C71EE0FFA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThreadSafety", "ThreadSafety\ThreadSafety.csproj", "{479C0678-8FBB-40C5-9525-28C71EE0FFA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csWebSocket", "csWebSocket\csWebSocket.csproj", "{6DF1A54F-0C68-457B-90A2-4F37881F6CEC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{479C0678-8FBB-40C5-9525-28C71EE0FFA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{479C0678-8FBB-40C5-9525-28C71EE0FFA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{479C0678-8FBB-40C5-9525-28C71EE0FFA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DF1A54F-0C68-457B-90A2-4F37881F6CEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DF1A54F-0C68-457B-90A2-4F37881F6CEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DF1A54F-0C68-457B-90A2-4F37881F6CEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DF1A54F-0C68-457B-90A2-4F37881F6CEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
