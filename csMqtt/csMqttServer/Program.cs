@@ -11,63 +11,61 @@ internal class Program
     static void Main(string[] args)
     {
 
-        // Configure MQTT server.
+        // 設定 MQTT server 的運作環境參數
         var optionsBuilder = new MqttServerOptionsBuilder()
             .WithConnectionBacklog(100)
             .WithDefaultEndpointPort(1884)
             .WithMaxPendingMessagesPerClient(1000);
 
-        // Define a mqttServer
+        // 透過 MqttFactory 這個工廠方法類別，建立一個 MQTT 伺服器物件
         _mqttServer = new MqttFactory().CreateMqttServer();
 
-        // Message arrived configuration
+        // 綁定當訊息送到此伺服器之後的事件，定義該做甚麼事情
         _mqttServer.UseApplicationMessageReceivedHandler(async e =>
         {
-            var foo = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
-            if (foo == "Test Message")
+            // 對於此訊息的 Payload 部分，將會是經過編碼的，因此需要先解碼
+            var payload = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
+            var topic = e.ApplicationMessage.Topic;
+            if (topic == "Hi")
             {
                 Console.WriteLine("subscription message received");
-                Console.WriteLine("Simulating messages...");
-                await Simulate();
+                Console.WriteLine("Simulating Say Hello messages...");
+                await SimulateSayHelloAsync();
             }
         });
 
-        // When a new client connected
+        // 一旦有用戶端連線上來之後，將會觸發這個事件
         _mqttServer.UseClientConnectedHandler(e =>
         {
             Console.WriteLine("***** CLIENT CONNECTED : " + e.ClientId + " *******");
         });
 
-        // Start the mqtt server
+        // 啟動這個 MQTT 伺服器
         _mqttServer.StartAsync(optionsBuilder.Build());
 
         Console.ReadLine();
     }
 
-    private static async Task PublishMessage(string message)
+    private static async Task SimulateSayHelloAsync()
     {
-        // Create mqttMessage
+        await PublishMessage("HiEcho", "Hello Word!");
+    }
+
+    private static async Task PublishMessage(string topic, string message)
+    {
+        // 產生一個 MQTT 訊息
         var mqttMessage = new MqttApplicationMessageBuilder()
-                            .WithTopic("mqttServerTopic")
+                            .WithTopic(topic)
                             .WithPayload(message)
                             .WithAtLeastOnceQoS()
                             .WithRetainFlag(false)
                             .WithDupFlag(false)
                             .Build();
 
-        // Publish the message asynchronously
+        // 發佈此剛剛建立的訊息
         var result = await _mqttServer.PublishAsync(mqttMessage, CancellationToken.None);
 
         if (result.ReasonCode == MQTTnet.Client.Publishing.MqttClientPublishReasonCode.Success)
             Console.WriteLine("Message published : " + message);
-    }
-
-    private static async Task Simulate()
-    {
-        for (int i = 0; i < 1000; i++)
-        {
-            var message = "This is a message from server " + i.ToString();
-            await PublishMessage(message);
-        }
     }
 }
