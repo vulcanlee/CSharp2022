@@ -1,0 +1,25 @@
+﻿@page "/"
+@inject IJSRuntime JS
+
+<PageTitle>Blazor With AmCharts</PageTitle>
+
+<h1>Blazor With AmCharts</h1>
+
+<button @onclick="GenerateColumnChart"
+    class="btn btn-info">顯示長條圖</button>
+
+<div id="chartdiv"></div>
+
+@code{
+    async Task GenerateColumnChart()
+    {
+        await JS.InvokeVoidAsync("CreateColumnChart");
+    }
+}
+
+<style>
+    #chartdiv {
+        width: 100%;
+        height: 400px;
+    }
+</style>

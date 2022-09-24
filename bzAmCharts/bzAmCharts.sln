@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32811.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bzAmCharts", "bzAmCharts\bzAmCharts.csproj", "{5B137020-628C-4CC7-AF99-8F281BB54BCB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5B137020-628C-4CC7-AF99-8F281BB54BCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B137020-628C-4CC7-AF99-8F281BB54BCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B137020-628C-4CC7-AF99-8F281BB54BCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B137020-628C-4CC7-AF99-8F281BB54BCB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E714ECBD-6620-41BA-A6C0-7B57F3E09118}
+	EndGlobalSection
+EndGlobal
