@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pinch="clr-namespace:Bertuzzi.MAUI.PinchZoomImage;assembly=Bertuzzi.MAUI.PinchZoomImage"
+             x:Class="mauiPinchZoomImage.MainPage">
+
+    <StackLayout HorizontalOptions="Center" VerticalOptions="Center"
+            Spacing="25"
+            Padding="30,0">
+
+        <Image
+                Source="dotnet_bot.png"
+                SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                HeightRequest="200"
+                HorizontalOptions="Center" />
+
+        <pinch:PinchZoom
+            Margin="20">
+            <Image Source="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Vervet_Monkey_%28Chlorocebus_pygerythrus%29.jpg/1200px-Vervet_Monkey_%28Chlorocebus_pygerythrus%29.jpg?20181109194254"/>
+        </pinch:PinchZoom>
+    </StackLayout>
+
+</ContentPage>
