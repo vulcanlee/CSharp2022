@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:TemplateUI.Controls"
+             Title="{Binding Title}"
+             x:Class="mauiPinBox.Views.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="30,0"
+            VerticalOptions="Center">
+
+            <Image Source="prism.png"
+             SemanticProperties.Description="Cute dot net bot waving hi to you!"
+             HeightRequest="150"
+             HorizontalOptions="Center" />
+
+            <StackLayout>
+                <controls:PinBox 
+                    ItemBorderColor="DarkGray"
+                    ItemColor="Black"
+                    Completed="PinBox_Completed"/>
+            </StackLayout>
+
+            <Button Text="{Binding Text}"
+              SemanticProperties.Hint="Counts the number of times you click"
+              Command="{Binding CountCommand}"
+              HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
