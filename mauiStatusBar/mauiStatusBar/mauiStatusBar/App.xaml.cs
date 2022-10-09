@@ -1,4 +1,6 @@
-﻿namespace mauiStatusBar;
+﻿using mauiStatusBar.Views;
+
+namespace mauiStatusBar;
 
 public partial class App : Application
 {
@@ -6,4 +8,15 @@ public partial class App : Application
     {
         InitializeComponent();
     }
+
+    //protected override Window CreateWindow(IActivationState activationState)
+    //{
+    //    // Workaround for: 'Either set MainPage or override CreateWindow.'??
+    //    if (this.MainPage == null)
+    //    {
+    //        this.MainPage = new EmptyPage();
+    //    }
+
+    //    return base.CreateWindow(activationState);
+    //}
 }
