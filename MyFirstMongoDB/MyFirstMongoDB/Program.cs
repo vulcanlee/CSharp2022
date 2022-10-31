@@ -9,7 +9,7 @@ internal class Program
 {
     static async Task Main(string[] args)
     {
-        QueryByBsonDocument();
+        //QueryByBsonDocument();
 
         await QueryByLINQAsync();
     }
@@ -42,12 +42,12 @@ internal class Program
         var client = new MongoClient(settings);
         var database = client.GetDatabase("sample_mflix");
 
-        #region 使用 MongoDB 的用法來查詢
+        #region 使用 C# LINQ 的用法來查詢
         var collection = database.GetCollection<Movie>("movies");
         var result = await collection.AsQueryable()
             .Where(x => x.title == "The Princess Bride")
             .FirstOrDefaultAsync();
-        Console.WriteLine(result);
+        Console.WriteLine(JsonConvert.SerializeObject(result));
         Console.WriteLine();
 
         #endregion

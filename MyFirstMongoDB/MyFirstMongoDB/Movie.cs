@@ -50,6 +50,7 @@ namespace MyFirstMongoDB
         public int meter { get; set; }
     }
 
+    [BsonIgnoreExtraElements]
     public class Imdb
     {
         public double rating { get; set; }
