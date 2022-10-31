@@ -1,0 +1,50 @@
+{
+	"_id": "573a1398f29313caabcea974",
+	"plot": "While home sick in bed, a young boy's grandfather reads him a story called The Princess Bride.",
+	"genres": ["Adventure", "Comedy", "Family"],
+	"runtime": 98,
+	"metacritic": 77,
+	"rated": "PG",
+	"cast": ["Cary Elwes", "Mandy Patinkin", "Chris Sarandon", "Christopher Guest"],
+	"poster": "https://m.media-amazon.com/images/M/MV5BMGM4M2Q5N2MtNThkZS00NTc1LTk1NTItNWEyZjJjNDRmNDk5XkEyXkFqcGdeQXVyMjA0MDQ0Mjc@._V1_SY1000_SX677_AL_.jpg",
+	"title": "The Princess Bride",
+	"fullplot": "A kindly grandfather sits down with his ill grandson and reads him a story. The story is one that has been passed down from father to son for generations. As the grandfather reads the story, the action comes alive. The story is a classic tale of love and adventure as the beautiful Buttercup, engaged to the odious Prince Humperdinck, is kidnapped and held against her will in order to start a war, It is up to Westley (her childhood beau, now returned as the Dread Pirate Roberts) to save her. On the way he meets a thief and his hired helpers, an accomplished swordsman and a huge, super strong giant, both of whom become Westley's companions in his quest.",
+	"languages": ["English"],
+	"released": "1987-10-09T00:00:00Z",
+	"directors": ["Rob Reiner"],
+	"writers": ["William Goldman (book)", "William Goldman (screenplay)"],
+	"awards": {
+		"wins": 7,
+		"nominations": 8,
+		"text": "Nominated for 1 Oscar. Another 6 wins & 8 nominations."
+	},
+	"lastupdated": "2015-09-10 17:41:34.337000000",
+	"year": 1987,
+	"imdb": {
+		"rating": 8.2,
+		"votes": 267597,
+		"id": 93779
+	},
+	"countries": ["USA"],
+	"type": "movie",
+	"tomatoes": {
+		"website": "http://www.theprincessbride-themovie.com/",
+		"viewer": {
+			"rating": 4.0,
+			"numReviews": 523369,
+			"meter": 95
+		},
+		"dvd": "1999-01-26T00:00:00Z",
+		"critic": {
+			"rating": 8.3,
+			"numReviews": 63,
+			"meter": 97
+		},
+		"lastUpdated": "2015-09-12T18:16:37Z",
+		"consensus": "A delightfully postmodern fairy tale, The Princess Bride is a deft, intelligent mix of swashbuckling, romance, and comedy that takes an age-old damsel-in-distress story and makes it fresh.",
+		"rotten": 2,
+		"production": "20th Century Fox",
+		"fresh": 61
+	},
+	"num_mflix_comments": 0
+}
