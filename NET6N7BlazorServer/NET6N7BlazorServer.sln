@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NET6N7BlazorServer", "NET6N7BlazorServer\NET6N7BlazorServer.csproj", "{4A7CE6B0-447C-49F4-BDAB-5CA7F2797551}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NET6N7BlazorServer", "NET6N7BlazorServer\NET6N7BlazorServer.csproj", "{8C0DCF83-5A07-4BB1-86F9-CF9219D28989}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4A7CE6B0-447C-49F4-BDAB-5CA7F2797551}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4A7CE6B0-447C-49F4-BDAB-5CA7F2797551}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4A7CE6B0-447C-49F4-BDAB-5CA7F2797551}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4A7CE6B0-447C-49F4-BDAB-5CA7F2797551}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C0DCF83-5A07-4BB1-86F9-CF9219D28989}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C0DCF83-5A07-4BB1-86F9-CF9219D28989}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C0DCF83-5A07-4BB1-86F9-CF9219D28989}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C0DCF83-5A07-4BB1-86F9-CF9219D28989}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {658ED01B-BB77-4122-BEE1-4EF3CD10D497}
+		SolutionGuid = {9356E23C-0006-407D-A111-E34CB7F5D89C}
 	EndGlobalSection
 EndGlobal
